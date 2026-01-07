@@ -9,9 +9,47 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Intro
+## Introduction
 
-## Biblio
+La course à pied représente le mode de déplacement naturel le plus rapide de l’homme. Elle se définit mécaniquement comme une succession de foulées bondissantes, où l'appui passe alternativement d'un pied à l'autre. Ce qui distingue fondamentalement la course de la marche, c'est l'existence d'une phase de suspension (ou phase de vol). Lors de la marche, un pied est toujours en contact avec le sol (et parfois les deux). À l'inverse, en course, le corps est projeté dans les airs à chaque pas ; il n'y a donc jamais de "double appui".
+
+Bien que courir semble instinctif, c'est une coordination gestuelle complexe qui se décompose en deux phases principales pour chaque jambe :
+
+-   La Phase d'Appui (au sol) : C'est le moment où le pied est en contact avec le terrain. Elle assure deux rôles : amortir le poids du corps à l'atterrissage, puis créer une poussée pour avancer.
+
+-   La Phase Oscillante (aérienne) : C'est la phase de retour de la jambe vers l'avant pour préparer le pas suivant. Elle comprend ce fameux temps de suspension où le coureur ne touche plus terre.
+
+Face à la popularité croissante de ce sport, la recherche scientifique s'est intensifiée autour d'un concept clé : l'optimisation de la dépense énergétique. C'est ce qu'on appelle l'économie de course. Pour faire simple, c'est la quantité d'énergie qu'un coureur consomme pour maintenir une certaine vitesse. Un coureur "économe" dépensera moins d'énergie pour la même vitesse, ce qui lui permettra de courir plus longtemps ou plus vite avant de fatiguer.
+
+L'arrivée des chaussures à plaque de carbone vise justement à améliorer cette économie en utilisant l'effet de levier et le renvoi d'énergie des mousses pour réduire le coût métabolique de chaque foulée.
+
+Si les bénéfices physiologiques des "Super Shoes" comme l'Adidas Prime X2 Strung sont documentés, il est essentiel de comprendre, les différences biomécanique avec une chaussure en mousse “plus classique”, la Adidas Boston 12.
+
+Ce document a pour but de comparer les mouvements angulaires des genoux. Les données angulaires seront confrontées pour chaque condition de chaussure et appliquées à chaque palier de vitesse (km/h) défini dans le protocole. Cela nous permettra d'isoler l'effet du matériel sur la gestuelle, indépendamment ou en corrélation avec l'augmentation de la vitesse de course.
+
+## Revue bibliographique
+
+Si le poids de la chaussure a longtemps été considéré comme le facteur principal de la performance, la recherche actuelle se concentre désormais sur l'architecture interne de la semelle.
+
+Les travaux de référence de Hoogkamer et al. (2018) ont marqué un tournant en démontrant que l'architecture de la chaussure joue un rôle prépondérant dans l'économie de course. Ils ont mis en évidence une réduction du coût énergétique de 4 % grâce à l'association d'une mousse à haut retour d'énergie et d'une plaque en fibre de carbone. Mécaniquement, ce gain ne provient pas d'un simple "effet ressort" : la plaque augmente la rigidité longitudinale (Bending Stiffness), ce qui rigidifie l'articulation métatarso-phalangienne (gros orteil) et modifie le bras de levier de la cheville. Cette configuration permet de stabiliser la compression de la mousse et de limiter la perte d'énergie lors de la flexion des orteils.
+
+Toutefois, il est important de nuancer ces résultats. L'étude indépendante de Joubert et Jones (2022), qui compare plusieurs modèles carbone, rappelle que la présence d'une plaque ne garantit pas la performance. Les gains varient considérablement d'un modèle à l'autre (de 0 à 4 %), prouvant que c'est la géométrie spécifique de la chaussure qui compte.
+
+Au-delà de l'énergétique, ces technologies modifient la façon de courir. Hébert-Losier et al. (2022) ont observé que les chaussures carbone (type Vaporfly) induisent naturellement une longueur de foulée plus grande sans modification de la cadence, ainsi qu'une modification des angles de la cheville. D'un point de vue cinématique, cet allongement, s'il n'est pas compensé par une réduction de la cadence ( comme c’est le cas ici), implique mécaniquement une augmentation du temps de vol.
+
+C'est ici qu'une comparaison avec le courant minimaliste devient pertinente. La littérature rapporte que les chaussures minimalistes favorisent une augmentation de la fréquence et une attaque avant-pied. À l'inverse, l'Adidas Prime X2 Strung, avec sa conception "maximaliste" (semelle très épaisse), pourrait engendrer des adaptations opposées. Il convient donc de déterminer si ses caractéristiques extrêmes modifient les angles articulaires différemment des standards connus.
+
+Enfin, une étude récente (Sobhani et al.) s'est intéressée à l'impact de la rigidité de la semelle sur la coordination fine du pied (articulations tarso-métatarsiennes et hallux). En utilisant l'analyse de la Phase Relative Continue (CRP), les auteurs démontrent que l'augmentation de la rigidité de la semelle (passant de molle à rigide) réduit significativement la variabilité de la coordination articulaire (environ 20 % de réduction). Cela suggère que la rigidité apportée par les plaques carbone contraint le pied dans un chemin moteur plus stable et reproductible, limitant les mouvements parasites ("degrés de liberté"), ce qui pourrait contribuer à l'efficience du geste.
+
+Globalement, cette analyse bibliographique laisse présager des différences biomécaniques marquées entre nos deux conditions expérimentales. Nous pouvons nous attendre à ce que l'Adidas Prime X2 Strung (plaque carbone, très rigide) induit une cinématique et une stabilité distinctes par rapport à l'Adidas Boston 12 (tiges en fibre de verre, semi-rigide) se traduisant par des angles différents, une foulée plus grande et un temps de vol supérieur.
+
+## Méthodologie et variables exploitées
+
+[***Premier jet de cette partie qui pose les bases de ce que l'on veut faire dans ce rapport***]{.underline}
+
+[***Colin tu peux modifier, et compléter cette partie.***]{.underline}
+
+L'étude de cas a été menée sur un sujet unique masculin, coureur régulier, ne présentant aucune pathologie musculo-squelettique récente susceptible d'altérer son pattern de locomotion. Le sujet présente les caractéristiques suivantes : une taille de 1,90 m pour une masse de 82 kg. 2.2. Protocole Expérimental Les acquisitions ont été réalisées sur tapis de course instrumentés. Le protocole expérimental repose sur une comparaison croisée entre deux conditions de chaussage (variables indépendantes) et trois paliers d'intensité. Conditions matérielles : Condition "Plaque Carbone" (Adidas Prime X2 Strung) : Ce modèle "maximaliste", caractérisé par une épaisseur de semelle importante (\> 50mm), intègre une double plaque carbone. Cette architecture vise une rigidité structurelle maximale pour optimiser le retour d'énergie. Condition "Mousse Classique" (Adidas Boston 12) : Ce modèle sert de condition comparative. D'architecture intermédiaire, il associe une mousse standard à des tiges en fibre de verre (Energy Rods), offrant une géométrie et une rigidité distinctes de la condition carbone "extrême". Procédure d'acquisition : Le sujet a réalisé des passages successifs avec chaque paire de chaussures à trois vitesses imposées : 12 km/h, 14 km/h et 16 km/h. Au total, 6 fichiers de capture de mouvement ont été enregistrés et traités (2 conditions × 3 vitesses), permettant d'analyser l'évolution cinématique en fonction de la charge de vitesse. 2.3. Stratégie d'Analyse et Variables Explorées Afin d'objectiver l'interaction entre l'architecture de la chaussure et la mécanique du coureur, nous avons défini une stratégie d'investigation reposant sur trois niveaux d'analyse complémentaires : 1. Analyse macroscopique : Structure temporelle et propulsion Ce premier niveau de lecture se focalise sur les paramètres spatio-temporels globaux, spécifiquement le Temps de Vol (tvol​) et la Fréquence de Foulée. L'objectif est de vérifier si la rigidité accrue et le volume de la Prime X2 induisent une modification du comportement propulsif, se traduisant par une foulée plus "aérienne" (augmentation du rapport suspension/appui) comparativement à la condition semi-rigide (Boston 12). 2. Analyse microscopique : Adaptations angulaires L'étude cinématique fine dans le plan sagittal (Cheville, Genou, Hanche) vise à identifier les mécanismes d'adaptation articulaire. En comparant les valeurs angulaires à l'impact (Initial Contact) et au décollage (Toe-off), nous chercherons à déterminer si la contrainte matérielle de la plaque carbone limite la flexion dorsale de la cheville ("verrouillage") et modifie l'extension du genou pour optimiser le bras de levier, ou si le coureur conserve son pattern naturel malgré la rigidité de l'interface. 3. Linéarité de la réponse à l'effort Enfin, l'approche incrémentale (12, 14, 16 km/h) a pour but d'identifier un potentiel "seuil d'activation". Cette analyse transversale permettra d'observer si les divergences cinématiques entre les deux chaussures sont constantes ou si les spécificités de la "Super Shoe" (Prime X2) ne s'expriment significativement qu'à des intensités plus élevées, lorsque les contraintes mécaniques appliquées au sol sont suffisantes pour déformer la structure composite.
 
 ## Nettoyage des données
 
@@ -141,6 +179,7 @@ M16_TOP <- head(m16, 100)
 ```
 
 Angle genou droit carbone 12
+
 ```{r}
 ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_genoux_droit)) +
   geom_line(color = "steelblue") +
@@ -153,6 +192,7 @@ ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_genoux_droit)) +
 ```
 
 Comparaison des angles des 2 genoux
+
 ```{r}
 ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
   geom_line(aes(y = angle_genoux_droit, color = "Droit"), size = 1) +
@@ -169,6 +209,7 @@ ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
 ```
 
 Angle cheville gauche
+
 ```{r}
 ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_cheville_gauche)) +
   geom_line(color = "steelblue") +
@@ -181,6 +222,7 @@ ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_cheville_gauche)) +
 ```
 
 Comparaison angle genou/cheville
+
 ```{r}
 ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
   geom_line(aes(y = angle_genoux_droit, color = "genou"), size = 1) +
@@ -195,7 +237,6 @@ ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
   ) +
   theme_minimal()
 ```
-
 
 ```{r}
 p1 <- ggplot(C12_TOP, aes(x = seq_len(nrow(C12_TOP)), y = angle_cheville_gauche)) +
@@ -234,6 +275,4 @@ ggplot(C12_M12, aes(x = seq_len(nrow(C12_M12)))) +
   theme_minimal()
 ```
 
-
-
-
+## Bibliographie
