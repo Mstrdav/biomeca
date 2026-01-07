@@ -1,0 +1,239 @@
+---
+title: "projet_biomeca"
+athor: "Zoé Orlandi"
+date: "2026-01-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro
+
+## Biblio
+
+## Nettoyage des données
+
+```{r}
+carbone12 <- read.csv('data_CSV/Carbone12_c3d_labeled.csv', sep=',')
+carbone14 <- read.csv('data_CSV/Carbone14_c3d_labeled.csv', sep=',')
+carbone16 <- read.csv('data_CSV/Carbone16_c3d_labeled.csv', sep=',')
+
+mousse12 <- read.csv('data_CSV/Mousse12_c3d_labeled.csv', sep=',')
+mousse14 <- read.csv('data_CSV/Mousse14_c3d_labeled.csv', sep=',')
+mousse16 <- read.csv('data_CSV/Mousse16_c3d_labeled.csv', sep=',')
+```
+
+```{r}
+# fonction de calcul des angles et nettoyage des données
+cleaner <- function(dat) {
+  
+  calc_angle <- function(Ax, Az, Bx, Bz, Cx, Cz,genou = 0) {
+    ba <- complex(real = Ax - Bx, imaginary = Az - Bz)
+    bc <- complex(real = Cx - Bx, imaginary = Cz - Bz)
+    angle <- (Arg(ba) - Arg(bc)) * 180 / pi
+    return(abs(abs(angle)-360*genou)) # l'angle du genou est à l'interieur
+  }
+  
+  data_clean <- data.frame(
+
+    bassin_X = dat$pHipOrigin_X,
+    bassin_Z = dat$pHipOrigin_Z,
+    
+    genoux_droit_X = (dat$pRightKneeLatEpicondyle_X + dat$pRightKneeMedEpicondyle_X) / 2,
+    genoux_droit_Z = (dat$pRightKneeLatEpicondyle_Z + dat$pRightKneeMedEpicondyle_Z) / 2,
+    
+    genoux_gauche_X = (dat$pLeftKneeLatEpicondyle_X + dat$pLeftKneeMedEpicondyle_X) / 2,
+    genoux_gauche_Z = (dat$pLeftKneeLatEpicondyle_Z + dat$pLeftKneeMedEpicondyle_Z) / 2,
+    
+    cheville_droite_X = (dat$pRightLatMalleolus_X + dat$pRightMedMalleolus_X) / 2,
+    cheville_droite_Z = (dat$pRightLatMalleolus_Z + dat$pRightMedMalleolus_Z) / 2,
+    
+    cheville_gauche_X = (dat$pLeftLatMalleolus_X + dat$pLeftMedMalleolus_X) / 2,
+    cheville_gauche_Z = (dat$pLeftLatMalleolus_Z + dat$pLeftMedMalleolus_Z) / 2,
+    
+    pied_droit_X = dat$pRightToe_X,
+    pied_droit_Z = dat$pRightToe_Z,
+    
+    pied_gauche_X = dat$pLeftToe_X,
+    pied_gauche_Z = dat$pLeftToe_Z,
+    
+    tronc_X = dat$pT12SpinalProcess_X,
+    tronc_Z = dat$pT12SpinalProcess_Z
+  )
+  
+  data_clean$angle_genoux_droit <- calc_angle(
+    data_clean$bassin_X, data_clean$bassin_Z,
+    data_clean$genoux_droit_X, data_clean$genoux_droit_Z,
+    data_clean$cheville_droite_X, data_clean$cheville_droite_Z, genou = 1
+  )
+  
+  data_clean$angle_genoux_gauche <- calc_angle(
+    data_clean$bassin_X, data_clean$bassin_Z,
+    data_clean$genoux_gauche_X, data_clean$genoux_gauche_Z,
+    data_clean$cheville_gauche_X, data_clean$cheville_gauche_Z, genou = 1
+  )
+  
+  data_clean$angle_cheville_droite <- calc_angle(
+    data_clean$genoux_droit_X, data_clean$genoux_droit_Z,
+    data_clean$cheville_droite_X, data_clean$cheville_droite_Z,
+    data_clean$pied_droit_X, data_clean$pied_droit_Z
+  )
+  
+  data_clean$angle_cheville_gauche <- calc_angle(
+    data_clean$genoux_gauche_X, data_clean$genoux_gauche_Z,
+    data_clean$cheville_gauche_X, data_clean$cheville_gauche_Z,
+    data_clean$pied_gauche_X, data_clean$pied_gauche_Z
+  )
+  
+  data_clean$angle_bassin_gauche <- calc_angle(
+    data_clean$tronc_X, data_clean$tronc_Z,
+    data_clean$bassin_X, data_clean$bassin_Z,
+    data_clean$genoux_gauche_X, data_clean$genoux_gauche_Z
+  )
+  # il n'y a qu'un seul bassin mais angle par rapport au genou gauche / droit
+  data_clean$angle_bassin_droit <- calc_angle(
+    data_clean$tronc_X, data_clean$tronc_Z,
+    data_clean$bassin_X, data_clean$bassin_Z,
+    data_clean$genoux_droit_X, data_clean$genoux_droit_Z
+  )
+  
+  return(data_clean)
+}
+```
+
+```{r}
+# tableaux propres
+c12 <- cleaner(carbone12)
+c14 <- cleaner(carbone14)
+c16 <- cleaner(carbone16)
+m12 <- cleaner(mousse12)
+m14 <- cleaner(mousse14)
+m16 <- cleaner(mousse16)
+
+write.csv(c12, "Carbone12_angle.csv", row.names = FALSE)
+write.csv(c14, "Carbone14_angle.csv", row.names = FALSE)
+write.csv(c16, "Carbone16_angle.csv", row.names = FALSE)
+
+write.csv(m12, "Mousse12_angle.csv", row.names = FALSE)
+write.csv(m14, "Mousse14_angle.csv", row.names = FALSE)
+write.csv(m16, "Mousse16_angle.csv", row.names = FALSE)
+```
+
+```{r}
+# test
+testons <- read.csv('./Mousse12_angle.csv')
+```
+
+## Graphiques
+
+```{r}
+library(ggplot2)
+library(gridExtra)
+```
+
+```{r}
+C12_TOP <- head(c12, 100)
+C16_TOP <- head(c16, 100)
+M12_TOP <- head(m12, 100)
+M16_TOP <- head(m16, 100)
+```
+
+Angle genou droit carbone 12
+```{r}
+ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_genoux_droit)) +
+  geom_line(color = "steelblue") +
+  labs(
+    title = "Évolution de l’angle du genou droit (Carbone 12)",
+    x = "Frame",
+    y = "Angle (degrés)"
+  ) +
+  theme_minimal()
+```
+
+Comparaison des angles des 2 genoux
+```{r}
+ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
+  geom_line(aes(y = angle_genoux_droit, color = "Droit"), size = 1) +
+  geom_line(aes(y = angle_genoux_gauche, color = "Gauche"), size = 1) +
+  scale_color_manual(values = c("Droit" = "steelblue", "Gauche" = "red")) +
+  labs(
+    title = "Comparaison des angles des genoux ",
+    subtitle = "Analyse dans le plan sagittal (X, Z)",
+    x = "Frame",
+    y = "Angle (degrés)",
+    color = "Côté"
+  ) +
+  theme_minimal()
+```
+
+Angle cheville gauche
+```{r}
+ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_cheville_gauche)) +
+  geom_line(color = "steelblue") +
+  labs(
+    title = "Évolution de l’angle de la cheville gache (Carbone 12)",
+    x = "Frame",
+    y = "Angle (degrés)"
+  ) +
+  theme_minimal()
+```
+
+Comparaison angle genou/cheville
+```{r}
+ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
+  geom_line(aes(y = angle_genoux_droit, color = "genou"), size = 1) +
+  geom_line(aes(y = angle_cheville_droite, color = "cheville"), size = 1) +
+  scale_color_manual(values = c("genou" = "steelblue", "cheville" = "red")) +
+  labs(
+    title = "Comparaison de l'angles du genou avec la cheville ",
+    subtitle = "Analyse dans le plan sagittal (X, Z)",
+    x = "Frame",
+    y = "Angle (degrés)",
+    color = "Côté"
+  ) +
+  theme_minimal()
+```
+
+
+```{r}
+p1 <- ggplot(C12_TOP, aes(x = seq_len(nrow(C12_TOP)), y = angle_cheville_gauche)) +
+  geom_line(color = "steelblue") +
+  labs(
+    title = "Évolution de l’angle de la cheville gache (Carbone 12)",
+    x = "Frame",
+    y = "Angle (degrés)"
+  ) +
+  theme_minimal()
+
+p2 <- ggplot(M12_TOP, aes(x = seq_len(nrow(M12_TOP)), y = angle_cheville_gauche)) +
+  geom_line(color = "steelblue") +
+  labs(
+    title = "Évolution de l’angle de la cheville gache (Mousse 12)",
+    x = "Frame",
+    y = "Angle (degrés)"
+  ) +
+  theme_minimal()
+
+grid.arrange(p1, p2, nrow=1, ncol=2)
+```
+
+```{r}
+colnames(M12_TOP) <- paste0(colnames(M12_TOP), "_M12")
+C12_M12 <- cbind(C12_TOP, M12_TOP)
+
+ggplot(C12_M12, aes(x = seq_len(nrow(C12_M12)))) +
+  geom_line(aes(y = angle_cheville_gauche), color = "steelblue") +
+  geom_line(aes(y = angle_cheville_gauche_M12), color = "orange") +
+  labs(
+    title = "Évolution de l’angle de la cheville gauche (Carbone 12 / Mousse 12)",
+    x = "Frame",
+    y = "Angle (degrés)"
+  ) +
+  theme_minimal()
+```
+
+
+
+
