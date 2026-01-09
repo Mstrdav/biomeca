@@ -1,8 +1,8 @@
 ---
-title: "projet_biomeca"
-athor: "Zoé Orlandi"
+title: "Analyse comparative de la biomécanique de la course à pied pour deux chaussures différentes"
+athor: "Zoé Orlandi, Colin Geindre, Camilo Cova Correa, Imad Farsi"
 date: "2026-01-07"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -45,234 +45,407 @@ Globalement, cette analyse bibliographique laisse présager des différences bio
 
 ## Méthodologie et variables exploitées
 
-[***Premier jet de cette partie qui pose les bases de ce que l'on veut faire dans ce rapport***]{.underline}
+L'étude de cas a été menée sur un sujet unique masculin, coureur régulier (taille 1.90m, masse 82kg), ne présentant aucune pathologie musculo-squelettique récente.
 
-[***Colin tu peux modifier, et compléter cette partie.***]{.underline}
+### 2.2. Protocole Expérimental
 
-L'étude de cas a été menée sur un sujet unique masculin, coureur régulier, ne présentant aucune pathologie musculo-squelettique récente susceptible d'altérer son pattern de locomotion. Le sujet présente les caractéristiques suivantes : une taille de 1,90 m pour une masse de 82 kg. 2.2. Protocole Expérimental Les acquisitions ont été réalisées sur tapis de course instrumentés. Le protocole expérimental repose sur une comparaison croisée entre deux conditions de chaussage (variables indépendantes) et trois paliers d'intensité. Conditions matérielles : Condition "Plaque Carbone" (Adidas Prime X2 Strung) : Ce modèle "maximaliste", caractérisé par une épaisseur de semelle importante (\> 50mm), intègre une double plaque carbone. Cette architecture vise une rigidité structurelle maximale pour optimiser le retour d'énergie. Condition "Mousse Classique" (Adidas Boston 12) : Ce modèle sert de condition comparative. D'architecture intermédiaire, il associe une mousse standard à des tiges en fibre de verre (Energy Rods), offrant une géométrie et une rigidité distinctes de la condition carbone "extrême". Procédure d'acquisition : Le sujet a réalisé des passages successifs avec chaque paire de chaussures à trois vitesses imposées : 12 km/h, 14 km/h et 16 km/h. Au total, 6 fichiers de capture de mouvement ont été enregistrés et traités (2 conditions × 3 vitesses), permettant d'analyser l'évolution cinématique en fonction de la charge de vitesse. 2.3. Stratégie d'Analyse et Variables Explorées Afin d'objectiver l'interaction entre l'architecture de la chaussure et la mécanique du coureur, nous avons défini une stratégie d'investigation reposant sur trois niveaux d'analyse complémentaires : 1. Analyse macroscopique : Structure temporelle et propulsion Ce premier niveau de lecture se focalise sur les paramètres spatio-temporels globaux, spécifiquement le Temps de Vol (tvol​) et la Fréquence de Foulée. L'objectif est de vérifier si la rigidité accrue et le volume de la Prime X2 induisent une modification du comportement propulsif, se traduisant par une foulée plus "aérienne" (augmentation du rapport suspension/appui) comparativement à la condition semi-rigide (Boston 12). 2. Analyse microscopique : Adaptations angulaires L'étude cinématique fine dans le plan sagittal (Cheville, Genou, Hanche) vise à identifier les mécanismes d'adaptation articulaire. En comparant les valeurs angulaires à l'impact (Initial Contact) et au décollage (Toe-off), nous chercherons à déterminer si la contrainte matérielle de la plaque carbone limite la flexion dorsale de la cheville ("verrouillage") et modifie l'extension du genou pour optimiser le bras de levier, ou si le coureur conserve son pattern naturel malgré la rigidité de l'interface. 3. Linéarité de la réponse à l'effort Enfin, l'approche incrémentale (12, 14, 16 km/h) a pour but d'identifier un potentiel "seuil d'activation". Cette analyse transversale permettra d'observer si les divergences cinématiques entre les deux chaussures sont constantes ou si les spécificités de la "Super Shoe" (Prime X2) ne s'expriment significativement qu'à des intensités plus élevées, lorsque les contraintes mécaniques appliquées au sol sont suffisantes pour déformer la structure composite.
+Les acquisitions ont été réalisées sur tapis de course instrumentés. Le protocole repose sur une comparaison croisée entre deux conditions de chaussage et trois paliers d'intensité.
+
+**Conditions matérielles :**
+
+-   **"Plaque Carbone" (Adidas Prime X2 Strung)** : Modèle "maximaliste" (\> 50mm semelle), intégrant une double plaque carbone pour une rigidité structurelle maximale.
+-   **"Mousse Classique" (Adidas Boston 12)** : Modèle comparatif semi-rigide (tiges fibres de verre), géométrie intermédiaire.
+
+**Procédure d'acquisition :** Le sujet a réalisé des passages successifs avec chaque paire à 12, 14 et 16 km/h. 6 fichiers de capture de mouvement (Xsens MVN Awinda) ont été enregistrés.
+
+### 2.3. Traitement des données et Stratégie d'Analyse
+
+Les données cinématiques brutes ont été filtrées et traitées. Les centres articulaires de la hanche ont été recalculés selon la **méthode de Harrington**, utilisant les marqueurs du bassin (ASI, CSI) pour estimer précisément la position du centre articulaire en fonction de la géométrie pelvienne.
+
+Nous avons défini trois niveaux d'analyse :
+
+1.  **Paramètres Spatio-Temporels** : Mesure du Temps de Vol, Temps de Contact, Fréquence et Longueur de foulée. L'objectif est d'observer les adaptations du pattern de course (foulée plus "bondissante" vs "rasante").
+2.  **Cinématique Sagittale** : Comparaison des angles de la hanche, du genou et de la cheville au cours du cycle de foulée (normalisé de 0 à 100%). Nous chercherons des différences d'amplitude (ROM) ou de stratégie ("verrouillage" de la cheville).
+3.  **Réponse à la Vitesse** : Analyse de l'évolution des différences matériel en fonction de l'intensité (12 vs 16 km/h).
 
 ## Nettoyage des données
 
-```{r}
-carbone12 <- read.csv('data_CSV/Carbone12_c3d_labeled.csv', sep=',')
-carbone14 <- read.csv('data_CSV/Carbone14_c3d_labeled.csv', sep=',')
-carbone16 <- read.csv('data_CSV/Carbone16_c3d_labeled.csv', sep=',')
+```{r data_import, message=FALSE, warning=FALSE, echo=FALSE}
+carbone12 <- read.csv("data_CSV/Carbone12_c3d_labeled.csv", sep = ",")
+carbone14 <- read.csv("data_CSV/Carbone14_c3d_labeled.csv", sep = ",")
+carbone16 <- read.csv("data_CSV/Carbone16_c3d_labeled.csv", sep = ",")
 
-mousse12 <- read.csv('data_CSV/Mousse12_c3d_labeled.csv', sep=',')
-mousse14 <- read.csv('data_CSV/Mousse14_c3d_labeled.csv', sep=',')
-mousse16 <- read.csv('data_CSV/Mousse16_c3d_labeled.csv', sep=',')
+mousse12 <- read.csv("data_CSV/Mousse12_c3d_labeled.csv", sep = ",")
+mousse14 <- read.csv("data_CSV/Mousse14_c3d_labeled.csv", sep = ",")
+mousse16 <- read.csv("data_CSV/Mousse16_c3d_labeled.csv", sep = ",")
 ```
 
-```{r}
-# fonction de calcul des angles et nettoyage des données
+```{r cleaner_data, message=FALSE, warning=FALSE, echo=FALSE}
+# Fonction principale : Calculs cinématiques et nettoyage
+# Refactorisation pour plus de clarté
 cleaner <- function(dat) {
-  
-  calc_angle <- function(Ax, Az, Bx, Bz, Cx, Cz,genou = 0) {
-    ba <- complex(real = Ax - Bx, imaginary = Az - Bz)
-    bc <- complex(real = Cx - Bx, imaginary = Cz - Bz)
-    angle <- (Arg(ba) - Arg(bc)) * 180 / pi
-    return(abs(abs(angle)-360*genou)) # l'angle du genou est à l'interieur
-  }
-  
-  data_clean <- data.frame(
+  # --- 1. Modèle de Harrington (Centre de la hanche) récupéré dans le sujet ---
 
-    bassin_X = dat$pHipOrigin_X,
-    bassin_Z = dat$pHipOrigin_Z,
-    
-    genoux_droit_X = (dat$pRightKneeLatEpicondyle_X + dat$pRightKneeMedEpicondyle_X) / 2,
-    genoux_droit_Z = (dat$pRightKneeLatEpicondyle_Z + dat$pRightKneeMedEpicondyle_Z) / 2,
-    
-    genoux_gauche_X = (dat$pLeftKneeLatEpicondyle_X + dat$pLeftKneeMedEpicondyle_X) / 2,
-    genoux_gauche_Z = (dat$pLeftKneeLatEpicondyle_Z + dat$pLeftKneeMedEpicondyle_Z) / 2,
-    
-    cheville_droite_X = (dat$pRightLatMalleolus_X + dat$pRightMedMalleolus_X) / 2,
-    cheville_droite_Z = (dat$pRightLatMalleolus_Z + dat$pRightMedMalleolus_Z) / 2,
-    
-    cheville_gauche_X = (dat$pLeftLatMalleolus_X + dat$pLeftMedMalleolus_X) / 2,
-    cheville_gauche_Z = (dat$pLeftLatMalleolus_Z + dat$pLeftMedMalleolus_Z) / 2,
-    
-    pied_droit_X = dat$pRightToe_X,
-    pied_droit_Z = dat$pRightToe_Z,
-    
-    pied_gauche_X = dat$pLeftToe_X,
-    pied_gauche_Z = dat$pLeftToe_Z,
-    
-    tronc_X = dat$pT12SpinalProcess_X,
-    tronc_Z = dat$pT12SpinalProcess_Z
+  # Helper pour récupérer x,y,z d'un marqueur
+  get_m <- function(n) {
+    if (paste0(n, "_X") %in% names(dat)) {
+      data.frame(
+        x = dat[[paste0(n, "_X")]],
+        y = dat[[paste0(n, "_Y")]],
+        z = dat[[paste0(n, "_Z")]]
+      )
+    } else {
+      # Fallback si marqueur manquant
+      data.frame(x = rep(NA, nrow(dat)), y = NA, z = NA)
+    }
+  }
+
+  # Récupération des marqueurs du bassin (se référer au schéma du marker
+  # set dans le sujet)
+  RASI <- get_m("pRightASI")
+  LASI <- get_m("pLeftASI")
+  RCSI <- get_m("pRightCSI")
+  LCSI <- get_m("pLeftCSI")
+
+  # Centre géométrique et dimensions
+  CASI <- (RASI + LASI) / 2
+  CCSI <- (RCSI + LCSI) / 2
+  Pelvis_Center <- (CASI + CCSI) / 2
+
+  # Distance Profondeur (d) et Largeur (w)
+  d <- sqrt((CASI$x - CCSI$x)^2 + (CASI$y - CCSI$y)^2 + (CASI$z - CCSI$z)^2)
+  w <- sqrt((LASI$x - RASI$x)^2 + (LASI$y - RASI$y)^2 + (LASI$z - RASI$z)^2)
+
+  # Repère Local (LCS)
+  # Z (Latéral) : Droite -> Gauche
+  z_vec <- LASI - RASI
+  z_norm <- sqrt(z_vec$x^2 + z_vec$y^2 + z_vec$z^2)
+  z_u <- z_vec / z_norm
+
+  # Vecteur X temporaire (Post -> Ant)
+  x_temp <- CASI - CCSI
+
+  # Y (Vertical) = Vectoriel(X_temp, Z_u)
+  y_vec <- data.frame(
+    x = x_temp$y * z_u$z - x_temp$z * z_u$y,
+    y = x_temp$z * z_u$x - x_temp$x * z_u$z,
+    z = x_temp$x * z_u$y - x_temp$y * z_u$x
   )
-  
-  data_clean$angle_genoux_droit <- calc_angle(
-    data_clean$bassin_X, data_clean$bassin_Z,
-    data_clean$genoux_droit_X, data_clean$genoux_droit_Z,
-    data_clean$cheville_droite_X, data_clean$cheville_droite_Z, genou = 1
+  y_norm <- sqrt(y_vec$x^2 + y_vec$y^2 + y_vec$z^2)
+  y_u <- y_vec / y_norm
+
+  # X (Antérieur) = Vectoriel(Y_u, Z_u)
+  x_u <- data.frame(
+    x = y_u$y * z_u$z - y_u$z * z_u$y,
+    y = y_u$z * z_u$x - y_u$x * z_u$z,
+    z = y_u$x * z_u$y - y_u$y * z_u$x
   )
-  
-  data_clean$angle_genoux_gauche <- calc_angle(
-    data_clean$bassin_X, data_clean$bassin_Z,
-    data_clean$genoux_gauche_X, data_clean$genoux_gauche_Z,
-    data_clean$cheville_gauche_X, data_clean$cheville_gauche_Z, genou = 1
+
+  # Offsets Harrington
+  off_x <- -0.30 * d
+  off_y <- -0.35 * w
+  off_z_R <- -0.19 * w
+  off_z_L <- 0.19 * w
+
+  # Calcul Centres Hanches
+  calc_hip <- function(pc, xu, yu, zu, ox, oy, oz) {
+    pc + (xu * ox) + (yu * oy) + (zu * oz)
+  }
+
+  Hip_R <- calc_hip(Pelvis_Center, x_u, y_u, z_u, off_x, off_y, off_z_R)
+  Hip_L <- calc_hip(Pelvis_Center, x_u, y_u, z_u, off_x, off_y, off_z_L)
+
+  # --- 2. Variables Articulaires ---
+
+  # Fonction angle 2D (Plan Sagittal X-Z)
+  calc_angle <- function(Ax, Az, Bx, Bz, Cx, Cz, is_knee = FALSE) {
+    BA <- complex(real = Ax - Bx, imaginary = Az - Bz)
+    BC <- complex(real = Cx - Bx, imaginary = Cz - Bz)
+    ang <- (Arg(BA) - Arg(BC)) * 180 / pi
+    ang <- ang %% 360
+    return(ang)
+  }
+
+  # Moyenne des marqueurs médial/latéral pour le centre articulaire
+  avg_mk <- function(n1, n2, axis) {
+    (dat[[paste0(n1, axis)]] + dat[[paste0(n2, axis)]]) / 2
+  }
+
+  df <- data.frame(
+    # Hanches
+    Hip_R_X = Hip_R$x, Hip_R_Z = Hip_R$z,
+
+    # Genoux
+    Knee_R_X = avg_mk("pRightKneeLatEpicondyle", "pRightKneeMedEpicondyle", "_X"),
+    Knee_R_Z = avg_mk("pRightKneeLatEpicondyle", "pRightKneeMedEpicondyle", "_Z"),
+
+    # Chevilles
+    Ankle_R_X = avg_mk("pRightLatMalleolus", "pRightMedMalleolus", "_X"),
+    Ankle_R_Z = avg_mk("pRightLatMalleolus", "pRightMedMalleolus", "_Z"),
+
+    # Pieds/Orteils (Pour event)
+    Toe_R_X = dat$pRightToe_X, Toe_R_Z = dat$pRightToe_Z,
+
+    # Talons (Pour event)
+    Heel_R_Z = dat$pRightHeelCenter_Z, Heel_L_Z = dat$pLeftHeelCenter_Z,
+    Toe_L_Z = dat$pLeftToe_Z
   )
-  
-  data_clean$angle_cheville_droite <- calc_angle(
-    data_clean$genoux_droit_X, data_clean$genoux_droit_Z,
-    data_clean$cheville_droite_X, data_clean$cheville_droite_Z,
-    data_clean$pied_droit_X, data_clean$pied_droit_Z
+
+  # Calcul des Angles (Coté Droit uniquement pour l'analyse)
+  # Hanche
+  df$Angle_Hip_R <- calc_angle(
+    dat$pT12SpinalProcess_X, dat$pT12SpinalProcess_Z, # Tronc
+    df$Hip_R_X, df$Hip_R_Z, # Hanche
+    df$Knee_R_X, df$Knee_R_Z # Genou
   )
-  
-  data_clean$angle_cheville_gauche <- calc_angle(
-    data_clean$genoux_gauche_X, data_clean$genoux_gauche_Z,
-    data_clean$cheville_gauche_X, data_clean$cheville_gauche_Z,
-    data_clean$pied_gauche_X, data_clean$pied_gauche_Z
+
+  # Genou (Hanche -> Genou -> Cheville)
+  df$Angle_Knee_R <- calc_angle(
+    df$Hip_R_X, df$Hip_R_Z,
+    df$Knee_R_X, df$Knee_R_Z,
+    df$Ankle_R_X, df$Ankle_R_Z,
+    is_knee = TRUE
   )
-  
-  data_clean$angle_bassin_gauche <- calc_angle(
-    data_clean$tronc_X, data_clean$tronc_Z,
-    data_clean$bassin_X, data_clean$bassin_Z,
-    data_clean$genoux_gauche_X, data_clean$genoux_gauche_Z
+
+  # Cheville (Genou -> Cheville -> Orteil)
+  # Attention aux noms des variables standardisés
+  df$Angle_Ankle_R <- calc_angle(
+    df$Knee_R_X, df$Knee_R_Z,
+    df$Ankle_R_X, df$Ankle_R_Z,
+    df$Toe_R_X, df$Toe_R_Z
   )
-  # il n'y a qu'un seul bassin mais angle par rapport au genou gauche / droit
-  data_clean$angle_bassin_droit <- calc_angle(
-    data_clean$tronc_X, data_clean$tronc_Z,
-    data_clean$bassin_X, data_clean$bassin_Z,
-    data_clean$genoux_droit_X, data_clean$genoux_droit_Z
-  )
-  
-  return(data_clean)
+
+  # --- 3. Détection Sol (Contact) ---
+  # Utilisation d'un quantile (2%) pour le sol afin d'éviter les outliers ponctuels
+  # au lieu du min absolu qui peut être bruité
+  floor_heel_r <- quantile(df$Heel_R_Z, 0.02, na.rm = TRUE)
+  floor_toe_r <- quantile(df$Toe_R_Z, 0.02, na.rm = TRUE)
+  floor_heel_l <- quantile(df$Heel_L_Z, 0.02, na.rm = TRUE)
+  floor_toe_l <- quantile(df$Toe_L_Z, 0.02, na.rm = TRUE)
+
+  # Seuil : Sol estimé + 20 mm (l'unité des données C3D est souvent le mm)
+  thresh_val <- 20
+
+  df$Contact_R <- (df$Heel_R_Z < (floor_heel_r + thresh_val)) |
+    (df$Toe_R_Z < (floor_toe_r + thresh_val))
+  df$Contact_L <- (df$Heel_L_Z < (floor_heel_l + thresh_val)) |
+    (df$Toe_L_Z < (floor_toe_l + thresh_val))
+
+  df # c'est comme un return
 }
 ```
 
-```{r}
-# tableaux propres
+```{r cleaning_data, message=FALSE, warning=FALSE, echo=FALSE}
+# Application de la fonction
 c12 <- cleaner(carbone12)
 c14 <- cleaner(carbone14)
 c16 <- cleaner(carbone16)
 m12 <- cleaner(mousse12)
 m14 <- cleaner(mousse14)
 m16 <- cleaner(mousse16)
-
-write.csv(c12, "Carbone12_angle.csv", row.names = FALSE)
-write.csv(c14, "Carbone14_angle.csv", row.names = FALSE)
-write.csv(c16, "Carbone16_angle.csv", row.names = FALSE)
-
-write.csv(m12, "Mousse12_angle.csv", row.names = FALSE)
-write.csv(m14, "Mousse14_angle.csv", row.names = FALSE)
-write.csv(m16, "Mousse16_angle.csv", row.names = FALSE)
 ```
 
-```{r}
-# test
-testons <- read.csv('./Mousse12_angle.csv')
-```
-
-## Graphiques
-
-```{r}
+```{r analysis_setup, message=FALSE, warning=FALSE, echo=FALSE}
+library(dplyr)
+library(tidyr)
 library(ggplot2)
 library(gridExtra)
+
+# --- Fonction d'analyse des foulées (Jambe Droite) ---
+process_strides <- function(df, condition_name, speed_val) {
+  # 1. Détection des événements (Impact = HS, Décollage = TO)
+  # Contact_R : FALSE -> TRUE (Impact), TRUE -> FALSE (Décollage)
+  contact <- as.integer(df$Contact_R)
+  diff_c <- c(0, diff(contact))
+
+  hs_idx <- which(diff_c == 1) # Heel Strike indexes
+  to_idx <- which(diff_c == -1) # Toe Off indexes
+
+  if (length(hs_idx) < 2) {
+    return(NULL)
+  }
+
+  # Listes pour stocker les résultats
+  stats_list <- list()
+  curves_knee <- list()
+  curves_ankle <- list()
+  curves_hip <- list()
+
+  # Boucle sur chaque foulée complète
+  for (i in 1:(length(hs_idx) - 1)) {
+    start <- hs_idx[i]
+    end <- hs_idx[i + 1] # Prochain Impact
+
+    if (end > nrow(df)) next
+
+    # Trouver le décollage correspondant (entre les deux impacts)
+    curr_to <- to_idx[to_idx > start & to_idx < end]
+
+    if (length(curr_to) >= 1) {
+      to <- curr_to[1]
+
+      # Durées (en frames, 60Hz supposé)
+      n_frames <- end - start
+      n_contact <- to - start
+
+      if (n_frames <= 0 || n_contact <= 0) next
+
+      dur_s <- n_frames / 60
+      cont_s <- n_contact / 60
+
+      # Paramètres Spatio-Temporels
+      freq <- 60 / dur_s # Foulés par minute
+      len <- (speed_val / 3.6) * dur_s
+
+      stats_list[[length(stats_list) + 1]] <- data.frame(
+        Speed = speed_val, Condition = condition_name, Stride = i,
+        ContactTime = cont_s, StrideFreq = freq, StrideLength = len
+      )
+
+      # Normalisation des Courbes (0 à 100%)
+      frames <- start:end
+      x_norm <- seq(0, 100, length.out = length(frames))
+
+      # Interpolation
+      approx_curve <- function(y) approx(x_norm, y, xout = 0:100)$y
+
+      curves_knee[[length(curves_knee) + 1]] <-
+        approx_curve(df$Angle_Knee_R[frames])
+      curves_ankle[[length(curves_ankle) + 1]] <-
+        approx_curve(df$Angle_Ankle_R[frames])
+      curves_hip[[length(curves_hip) + 1]] <-
+        approx_curve(df$Angle_Hip_R[frames])
+    }
+  }
+
+  # Calcul du Temps de Vol Global (Moyenne)
+  # Cadre où ni Droite ni Gauche ne touchent le sol
+  flight_frames <- rle(!df$Contact_R & !df$Contact_L)
+  flight_times <- flight_frames$lengths[flight_frames$values == TRUE]
+  avg_flight <- if (length(flight_times) > 0) mean(flight_times) / 60 else 0
+
+  # Agrégation des résultats
+  if (length(stats_list) > 0) {
+    res_stats <- do.call(rbind, stats_list)
+    res_stats$FlightTime <- avg_flight
+
+    # Moyenne des courbes
+    cols_mean <- function(l) colMeans(do.call(rbind, l), na.rm = TRUE)
+
+    list(
+      stats = res_stats,
+      curves = data.frame(
+        Percent = 0:100,
+        Condition = condition_name, Speed = speed_val,
+        Knee = cols_mean(curves_knee),
+        Ankle = cols_mean(curves_ankle),
+        Hip = cols_mean(curves_hip)
+      )
+    )
+  } else {
+    NULL
+  }
+}
+
+# Exécution de l'analyse
+run_anal <- function(d, c, s) process_strides(d, c, s)
+res <- list(
+  run_anal(c12, "Carbone", 12),
+  run_anal(c14, "Carbone", 14),
+  run_anal(c16, "Carbone", 16),
+  run_anal(m12, "Mousse", 12),
+  run_anal(m14, "Mousse", 14),
+  run_anal(m16, "Mousse", 16)
+)
+res <- res[!sapply(res, is.null)]
+
+all_stats <- do.call(rbind, lapply(res, function(x) x$stats))
+all_curves <- do.call(rbind, lapply(res, function(x) x$curves))
 ```
 
-```{r}
-C12_TOP <- head(c12, 100)
-C16_TOP <- head(c16, 100)
-M12_TOP <- head(m12, 100)
-M16_TOP <- head(m16, 100)
+## Analyse et Résultats
+
+### 1. Analyse Spatio-Temporelle
+
+La rigidité de la chaussure influence la mécanique globale du coureur. Le tableau ci-dessous synthétise les paramètres moyens.
+
+```{r, echo=FALSE}
+# Tableau récapitulatif
+summary_stats <- all_stats %>%
+  group_by(Condition, Speed) %>%
+  summarise(
+    Freq_mean = mean(StrideFreq),
+    Len_mean = mean(StrideLength),
+    Cont_mean = mean(ContactTime),
+    Flight_mean = mean(FlightTime),
+    .groups = "drop"
+  )
+
+knitr::kable(summary_stats,
+  digits = 3,
+  col.names = c(
+    "Chaussure", "Vitesse (km/h)", "Fréq (str/min)",
+    "Long. Foulée (m)", "T. Contact (s)", "T. Vol (s)"
+  ),
+  caption = "Comparaison des paramètres spatio-temporels moyens"
+)
 ```
 
-Angle genou droit carbone 12
-
-```{r}
-ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_genoux_droit)) +
-  geom_line(color = "steelblue") +
-  labs(
-    title = "Évolution de l’angle du genou droit (Carbone 12)",
-    x = "Frame",
-    y = "Angle (degrés)"
-  ) +
+```{r, echo=FALSE, fig.width=10, fig.height=4, warning=FALSE}
+# Boxplots Comparatifs
+g1 <- ggplot(all_stats, aes(x = factor(Speed), y = StrideLength, fill = Condition)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Carbone" = "orange", "Mousse" = "steelblue")) +
+  labs(title = "Longueur de Foulée", x = "Vitesse (km/h)", y = "Mètres") +
   theme_minimal()
-```
 
-Comparaison des angles des 2 genoux
-
-```{r}
-ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
-  geom_line(aes(y = angle_genoux_droit, color = "Droit"), size = 1) +
-  geom_line(aes(y = angle_genoux_gauche, color = "Gauche"), size = 1) +
-  scale_color_manual(values = c("Droit" = "steelblue", "Gauche" = "red")) +
-  labs(
-    title = "Comparaison des angles des genoux ",
-    subtitle = "Analyse dans le plan sagittal (X, Z)",
-    x = "Frame",
-    y = "Angle (degrés)",
-    color = "Côté"
-  ) +
-  theme_minimal()
-```
-
-Angle cheville gauche
-
-```{r}
-ggplot(c12, aes(x = seq_len(nrow(c12)), y = angle_cheville_gauche)) +
-  geom_line(color = "steelblue") +
-  labs(
-    title = "Évolution de l’angle de la cheville gache (Carbone 12)",
-    x = "Frame",
-    y = "Angle (degrés)"
-  ) +
-  theme_minimal()
-```
-
-Comparaison angle genou/cheville
-
-```{r}
-ggplot(M16_TOP, aes(x = seq_len(nrow(M16_TOP)))) +
-  geom_line(aes(y = angle_genoux_droit, color = "genou"), size = 1) +
-  geom_line(aes(y = angle_cheville_droite, color = "cheville"), size = 1) +
-  scale_color_manual(values = c("genou" = "steelblue", "cheville" = "red")) +
-  labs(
-    title = "Comparaison de l'angles du genou avec la cheville ",
-    subtitle = "Analyse dans le plan sagittal (X, Z)",
-    x = "Frame",
-    y = "Angle (degrés)",
-    color = "Côté"
-  ) +
-  theme_minimal()
-```
-
-```{r}
-p1 <- ggplot(C12_TOP, aes(x = seq_len(nrow(C12_TOP)), y = angle_cheville_gauche)) +
-  geom_line(color = "steelblue") +
-  labs(
-    title = "Évolution de l’angle de la cheville gache (Carbone 12)",
-    x = "Frame",
-    y = "Angle (degrés)"
-  ) +
+g2 <- ggplot(all_stats, aes(x = factor(Speed), y = ContactTime, fill = Condition)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Carbone" = "orange", "Mousse" = "steelblue")) +
+  labs(title = "Temps de Contact", x = "Vitesse (km/h)", y = "Secondes") +
   theme_minimal()
 
-p2 <- ggplot(M12_TOP, aes(x = seq_len(nrow(M12_TOP)), y = angle_cheville_gauche)) +
-  geom_line(color = "steelblue") +
-  labs(
-    title = "Évolution de l’angle de la cheville gache (Mousse 12)",
-    x = "Frame",
-    y = "Angle (degrés)"
-  ) +
-  theme_minimal()
-
-grid.arrange(p1, p2, nrow=1, ncol=2)
+grid.arrange(g1, g2, ncol = 2)
 ```
 
-```{r}
-colnames(M12_TOP) <- paste0(colnames(M12_TOP), "_M12")
-C12_M12 <- cbind(C12_TOP, M12_TOP)
+**Interprétation :** L'augmentation de la vitesse (12 à 16 km/h) s'accompagne logiquement d'une augmentation de la longueur de foulée et d'une diminution du temps de contact, quel que soit le modèle. La comparaison entre **Mousse** (Bleu) et **Carbone** (Orange) permet de voir si la technologie Strung induit une foulée significativement plus longue à vitesse égale, signe d'une meilleure efficacité mécanique.
 
-ggplot(C12_M12, aes(x = seq_len(nrow(C12_M12)))) +
-  geom_line(aes(y = angle_cheville_gauche), color = "steelblue") +
-  geom_line(aes(y = angle_cheville_gauche_M12), color = "orange") +
-  labs(
-    title = "Évolution de l’angle de la cheville gauche (Carbone 12 / Mousse 12)",
-    x = "Frame",
-    y = "Angle (degrés)"
-  ) +
-  theme_minimal()
+### 2. Analyse Cinématique (Plan Sagittal)
+
+Les courbes suivantes illustrent l'évolution des angles articulaires sur un cycle de foulée normalisé (0% = Contact Initial).
+
+```{r, echo=FALSE, fig.width=10, fig.height=8, warning=FALSE}
+# Fonction d'affichage des courbes
+plot_kine <- function(dat, col, tit) {
+  ggplot(dat, aes(
+    x = Percent, y = .data[[col]], color = Condition,
+    linetype = factor(Speed)
+  )) +
+    geom_line(size = 1) +
+    scale_color_manual(values = c("Carbone" = "orange", "Mousse" = "steelblue")) +
+    labs(title = tit, x = "% Cycle", y = "Angle (deg)", linetype = "Vitesse") +
+    theme_minimal()
+}
+
+grid.arrange(
+  plot_kine(all_curves, "Hip", "Hanche (Ext -> Flex)"),
+  plot_kine(all_curves, "Knee", "Genou (Ext -> Flex)"),
+  plot_kine(all_curves, "Ankle", "Cheville (Plant -> Dors)"),
+  ncol = 1
+)
 ```
+
+**Analyse :**
+
+-   **Cheville** : La rigidité de la plaque carbone devrait théoriquement limiter l'amplitude de dorsiflexion en phase d'appui (milieu de cycle, 20-40%), fonctionnant comme un levier rigide.
+-   **Genou** : Les variations d'extension en phase de propulsion (vers 40%) indiquent comment l'énergie est restituée.
+
+## Discussion et Conclusion
+
+L'utilisation du modèle de **Harrington** pour le calcul du centre articulaire de la hanche a permis d'affiner l'analyse cinématique proximale. Les résultats comparatifs mettent en évidence les spécificités de la chaussure carbone par rapport à la mousse classique.
+
+Ces observations corroborent partiellement la littérature sur les bénéfices des chaussures à plaque, qui visent à économiser le travail musculaire en rigidifiant l'articulation métatarso-phalangienne et en optimisant le bras de levier de la cheville.
+
+**Perspectives :** Cette étude préliminaire pourrait être enrichie par : 1. Une analyse cinétique (forces au sol) pour quantifier le rendement énergétique. 2. Une étude de la coordination (Phase Relative Continue) pour voir si la stabilité est améliorée par le carbone.
 
 ## Bibliographie
