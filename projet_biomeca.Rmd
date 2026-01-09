@@ -58,7 +58,7 @@ Les acquisitions ont été réalisées sur tapis de course instrumentés. Le pro
 
 **Procédure d'acquisition :** Le sujet a réalisé des passages successifs avec chaque paire à 12, 14 et 16 km/h. 6 fichiers de capture de mouvement (Xsens MVN Awinda) ont été enregistrés.
 
-###  Traitement des données et Stratégie d'Analyse
+### Traitement des données et Stratégie d'Analyse
 
 Les données cinématiques brutes ont été filtrées et traitées. Les centres articulaires de la hanche ont été recalculés selon la **méthode de Harrington**, utilisant les marqueurs du bassin (ASI, CSI) pour estimer précisément la position du centre articulaire en fonction de la géométrie pelvienne.
 
@@ -444,9 +444,29 @@ Analyse :
 
 Je sais pas trop comment analyser. A vous si vous avez de l'inspi, sinon je peux repasser plus tard.
 
+Nos hypothèses, posées grâce à la revue bibliographique, sont en partie valides. On remarque bien un temps de vol supérieur avec les chaussures carbone ainsi qu'une longueur de foulée plus grande. Cependant, les autres hypothèses sont à mettre en perspective selon la vitesse du coureur.
+
 Cette étude pourrait être enrichie par :
 
 1.  Une analyse cinétique (forces au sol) pour quantifier le rendement énergétique.
 2.  Un calcul des efforts avec un modèle musculo-squelettique, via un logiciel comme OpenSim.
 
 ## Bibliographie
+
+Divert, C. (2005). Influence du chaussage sur les caractéristiques mécaniques et le coût énergétique de la course à pied [Thèse de doctorat, Université Jean Monnet de Saint-Étienne]. <https://theses.fr/2005STET011T> 
+
+Frederick, E. C., Clarke, T. E., Larsen, J. L., & Cooper, L. B. (1983). The effects of shoe cushioning on the oxygen demands of running. Biomechanical Aspects of Sports Shoes and Playing Surfaces, 107–111. <https://www.thieme-connect.de/products/ejournals/abstract/10.1055/s-2008-1026043> 
+
+Fuller, J. T., Thewlis, D., Tsiros, M. D., Brown, N. A., & Buckley, J. D. (2017). Six-week transition to minimalist shoes improves running economy and time-trial performance. Journal of Science and Medicine in Sport, 20(12), 1117–1122. <https://doi.org/10.1016/j.jsams.2017.04.013> 
+
+Hébert-Losier, Kim, et al. “Metabolic and Performance Responses of Male Runners Wearing 3 Types of Footwear: Nike Vaporfly 4%, Saucony Endorphin Racing Flats, and Their Own Shoes.” Journal of Sport and Health Science, vol. 11, no. 3, May 2022, pp. 275–84. ScienceDirect,[ https://doi.org/10.1016/j.jshs.2020.11.012](https://doi.org/10.1016/j.jshs.2020.11.012)
+
+Hoogkamer, W., Kipp, S., Frank, J. H., Farina, E. M., Luo, G., & Kram, R. (2018). A comparison of the energetic cost of running in marathon racing shoes. Sports Medicine, 48(4), 1009–1019. <https://doi.org/10.1007/s40279-017-0811-2> 
+
+Joubert, D. P., & Jones, G. P. (2022). A comparison of running economy across seven carbon-plated racing shoes. International Journal of Exercise Science, 15(2), 528–543. <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9362879/> 
+
+Leboeuf, F., Achard de Leluardière, F., Lacouture, P., Duboy, J., Leplanquais, F., & Junqua, A. (2006). Étude biomécanique de la course à pied. EMC - Podologie, 2(1), 1–13. [https://doi.org/10.1016/S0292-062X(06)46128-7](https://doi.org/10.1016/S0292-062X(06)46128-7) 
+
+Sobhani, S., van den Heuvel, E. R., Dekker, R., Postema, K., Kluitenberg, B., Bredeweg, S. W., & Hijmans, J. M. (2017). The effect of shoe sole stiffness on coordination pattern and its variability in tars-metatarsal and forefoot-hallux joints during stance phase of running. Journal of Biomechanics, 56, 116–121. <https://www.sciencedirect.com/science/article/pii/S144024401630055X?via%3Dihub> 
+
+Wang, I. L., Graham, R. B., Bourdon, E. J., Chen, Y. M., Gu, C. Y., & Wang, L. I. (2020). Biomechanical analysis of running foot strike in shoes of different mass. International Journal of Environmental Research and Public Health, 17(18), 6835. <https://pubmed.ncbi.nlm.nih.gov/32132836/> 
