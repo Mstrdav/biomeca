@@ -25,7 +25,7 @@ L'arrivée des chaussures à plaque de carbone vise justement à améliorer cett
 
 Si les bénéfices physiologiques des "Super Shoes" comme l'Adidas Prime X2 Strung sont documentés, il est essentiel de comprendre, les différences biomécanique avec une chaussure en mousse “plus classique”, la Adidas Boston 12.
 
-Ce document a pour but de comparer les mouvements angulaires des genoux. Les données angulaires seront confrontées pour chaque condition de chaussure et appliquées à chaque palier de vitesse (km/h) défini dans le protocole. Cela nous permettra d'isoler l'effet du matériel sur la gestuelle, indépendamment ou en corrélation avec l'augmentation de la vitesse de course.
+Ce document a pour but de comparer les mouvements angulaires des articulations. Les données angulaires seront confrontées pour chaque condition de chaussure et appliquées à chaque palier de vitesse (km/h) défini dans le protocole. Cela nous permettra d'isoler l'effet du matériel sur la gestuelle, indépendamment ou en corrélation avec l'augmentation de la vitesse de course.
 
 ## Revue bibliographique
 
@@ -47,7 +47,7 @@ Globalement, cette analyse bibliographique laisse présager des différences bio
 
 L'étude de cas a été menée sur un sujet unique masculin, coureur régulier (taille 1.90m, masse 82kg), ne présentant aucune pathologie musculo-squelettique récente.
 
-### 2.2. Protocole Expérimental
+### Protocole Expérimental
 
 Les acquisitions ont été réalisées sur tapis de course instrumentés. Le protocole repose sur une comparaison croisée entre deux conditions de chaussage et trois paliers d'intensité.
 
@@ -58,7 +58,7 @@ Les acquisitions ont été réalisées sur tapis de course instrumentés. Le pro
 
 **Procédure d'acquisition :** Le sujet a réalisé des passages successifs avec chaque paire à 12, 14 et 16 km/h. 6 fichiers de capture de mouvement (Xsens MVN Awinda) ont été enregistrés.
 
-### 2.3. Traitement des données et Stratégie d'Analyse
+###  Traitement des données et Stratégie d'Analyse
 
 Les données cinématiques brutes ont été filtrées et traitées. Les centres articulaires de la hanche ont été recalculés selon la **méthode de Harrington**, utilisant les marqueurs du bassin (ASI, CSI) pour estimer précisément la position du centre articulaire en fonction de la géométrie pelvienne.
 
