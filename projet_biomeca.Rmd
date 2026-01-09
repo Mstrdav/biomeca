@@ -408,7 +408,11 @@ g2 <- ggplot(all_stats, aes(x = factor(Speed), y = ContactTime, fill = Condition
 grid.arrange(g1, g2, ncol = 2)
 ```
 
-**Interprétation :** L'augmentation de la vitesse (12 à 16 km/h) s'accompagne logiquement d'une augmentation de la longueur de foulée et d'une diminution du temps de contact, quel que soit le modèle. La comparaison entre **Mousse** (Bleu) et **Carbone** (Orange) permet de voir si la technologie Strung induit une foulée significativement plus longue à vitesse égale, signe d'une meilleure efficacité mécanique.
+L'augmentation de la vitesse (12 à 16 km/h) s'accompagne logiquement d'une augmentation 
+de la longueur de foulée et d'une diminution du temps de contact, quel que soit le modèle. 
+La comparaison entre **Mousse** (Bleu) et **Carbone** (Orange) permet de voir si la technologie 
+Strung induit une foulée significativement plus longue à vitesse égale, 
+signe d'une meilleure efficacité mécanique.
 
 ### 2. Analyse Cinématique (Plan Sagittal)
 
@@ -435,17 +439,18 @@ grid.arrange(
 )
 ```
 
-**Analyse :**
+Analyse : 
 
 -   **Cheville** : La rigidité de la plaque carbone devrait théoriquement limiter l'amplitude de dorsiflexion en phase d'appui (milieu de cycle, 20-40%), fonctionnant comme un levier rigide.
 -   **Genou** : Les variations d'extension en phase de propulsion (vers 40%) indiquent comment l'énergie est restituée.
 
 ## Discussion et Conclusion
 
-L'utilisation du modèle de **Harrington** pour le calcul du centre articulaire de la hanche a permis d'affiner l'analyse cinématique proximale. Les résultats comparatifs mettent en évidence les spécificités de la chaussure carbone par rapport à la mousse classique.
+Je sais pas trop comment analyser. A vous si vous avez de l'inspi, sinon je peux repasser plus tard.
 
-Ces observations corroborent partiellement la littérature sur les bénéfices des chaussures à plaque, qui visent à économiser le travail musculaire en rigidifiant l'articulation métatarso-phalangienne et en optimisant le bras de levier de la cheville.
+Cette étude pourrait être enrichie par : 
 
-**Perspectives :** Cette étude préliminaire pourrait être enrichie par : 1. Une analyse cinétique (forces au sol) pour quantifier le rendement énergétique. 2. Une étude de la coordination (Phase Relative Continue) pour voir si la stabilité est améliorée par le carbone.
+1. Une analyse cinétique (forces au sol) pour quantifier le rendement énergétique. 
+2. Un calcul des efforts avec un modèle musculo-squelettique, via un logiciel comme OpenSim.
 
 ## Bibliographie
