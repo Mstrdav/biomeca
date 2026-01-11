@@ -68,7 +68,7 @@ Nous avons défini trois niveaux d'analyse :
 2.  **Cinématique Sagittale** : Comparaison des angles de la hanche, du genou et de la cheville au cours du cycle de foulée (normalisé de 0 à 100%). Nous chercherons des différences d'amplitude (ROM) ou de stratégie ("verrouillage" de la cheville).
 3.  **Réponse à la Vitesse** : Analyse de l'évolution des différences matériel en fonction de l'intensité (12 vs 16 km/h).
 
-## Nettoyage des données
+`## Nettoyage des données`
 
 ```{r data_import, message=FALSE, warning=FALSE, echo=FALSE}
 carbone12 <- read.csv("data_CSV/Carbone12_c3d_labeled.csv", sep = ",")
@@ -365,7 +365,7 @@ all_curves <- do.call(rbind, lapply(res, function(x) x$curves))
 
 ## Analyse et Résultats
 
-### 1. Analyse Spatio-Temporelle
+### Analyse Spatio-Temporelle
 
 La rigidité de la chaussure influence la mécanique globale du coureur. Le tableau ci-dessous synthétise les paramètres moyens.
 
@@ -414,7 +414,7 @@ L'augmentation de la vitesse (12 à 16 km/h) s'accompagne logiquement d'une augm
 
 La comparaison entre la chaussure à plaque carbone et la chaussure en mousse ne met pas en évidence d’avantage cinématique systématique de la technologie Strung sur la longueur de foulée ou le temps de contact au sol. Les différences observées entre les deux modèles varient selon la vitesse de course, suggérant que l’influence de la plaque carbone sur la cinématique dépend du contexte d’utilisation plutôt que d’un effet mécanique constant.
 
-### 2. Analyse Cinématique (Plan Sagittal)
+### Analyse Cinématique (Plan Sagittal)
 
 Les courbes suivantes illustrent l'évolution des angles articulaires sur un cycle de foulée normalisé (0% = Contact Initial).
 
