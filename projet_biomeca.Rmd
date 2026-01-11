@@ -410,6 +410,10 @@ grid.arrange(g1, g2, ncol = 2)
 
 L'augmentation de la vitesse (12 à 16 km/h) s'accompagne logiquement d'une augmentation de la longueur de foulée et d'une diminution du temps de contact, quel que soit le modèle. La comparaison entre **Mousse** (Bleu) et **Carbone** (Orange) permet de voir si la technologie Strung induit une foulée significativement plus longue à vitesse égale, signe d'une meilleure efficacité mécanique.
 
+À 12 km/h, la technologie Strung semble s’accompagner d’une légère augmentation de la longueur de foulée par rapport à la chaussure en mousse, bien que les distributions des valeurs et les temps de contact au sol restent globalement similaires entre les deux modèles. Cette tendance est cohérente avec les hypothèses issues de la littérature concernant une possible amélioration de l’efficacité mécanique à vitesse modérée. En revanche, à 14 km/h, la longueur de foulée apparaît comparable entre les deux chaussures, tandis que le temps de contact au sol est plus élevé avec la technologie Strung, suggérant une adaptation différente de la stratégie de course à cette vitesse. Enfin, à 16 km/h, la chaussure en mousse est associée à une longueur de foulée plus importante, pour un temps de contact au sol similaire entre les deux modèles, ce qui ne va pas dans le sens d’un avantage cinématique de la technologie Strung aux vitesses élevées.
+
+La comparaison entre la chaussure à plaque carbone et la chaussure en mousse ne met pas en évidence d’avantage cinématique systématique de la technologie Strung sur la longueur de foulée ou le temps de contact au sol. Les différences observées entre les deux modèles varient selon la vitesse de course, suggérant que l’influence de la plaque carbone sur la cinématique dépend du contexte d’utilisation plutôt que d’un effet mécanique constant.
+
 ### 2. Analyse Cinématique (Plan Sagittal)
 
 Les courbes suivantes illustrent l'évolution des angles articulaires sur un cycle de foulée normalisé (0% = Contact Initial).
@@ -437,14 +441,23 @@ grid.arrange(
 
 Analyse :
 
--   **Cheville** : La rigidité de la plaque carbone devrait théoriquement limiter l'amplitude de dorsiflexion en phase d'appui (milieu de cycle, 20-40%), fonctionnant comme un levier rigide.
--   **Genou** : Les variations d'extension en phase de propulsion (vers 40%) indiquent comment l'énergie est restituée.
+-   **Cheville :**\
+    Les profils angulaires montrent, avec la chaussure à plaque carbone, des angles globalement plus faibles, traduisant une réduction de l’amplitude de dorsiflexion au cours de la phase d’appui (environ 20–40 % du cycle). Cette observation suggère une limitation relative du mouvement de la cheville, pouvant être liée à une rigidité accrue du système pied-chaussure.
+
+-   **Genou :**\
+    Les variations angulaires du genou au cours de la phase de propulsion (autour de 40 % du cycle) présentent des différences d’amplitude entre les deux types de chaussures. Ces variations peuvent refléter une adaptation de la mécanique articulaire selon le type de chaussure.
+
+Les profils angulaires des différentes articulations restent globalement similaires entre les vitesses et les types de chaussures, suggérant une stratégie de course conservée. Néanmoins, la chaussure à plaque carbone est associée à des amplitudes angulaires légèrement réduites, en particulier au niveau de la cheville, et à des cinématiques plus lissées au niveau du genou et de la hanche. Ces différences, plus marquées à 16 km/h, traduisent une adaptation progressive de la mécanique articulaire avec l’augmentation de la vitesse, sans modification majeure de la cinématique globale.
 
 ## Discussion et Conclusion
 
 Je sais pas trop comment analyser. A vous si vous avez de l'inspi, sinon je peux repasser plus tard.
 
-Nos hypothèses, posées grâce à la revue bibliographique, sont en partie valides. On remarque bien un temps de vol supérieur avec les chaussures carbone ainsi qu'une longueur de foulée plus grande. Cependant, les autres hypothèses sont à mettre en perspective selon la vitesse du coureur.
+Les résultats de ce projet montrent que les effets de la chaussure à plaque carbone sur la cinématique de course ne sont ni systématiques ni uniformes selon la vitesse. À 12 km/h, la chaussure à plaque carbone est associée à une légère augmentation de la longueur de foulée ainsi qu’à un temps de vol plus élevé, en accord avec certaines hypothèses issues de la littérature. En revanche, ces différences ne se maintiennent pas aux vitesses plus élevées. À 14 et 16 km/h, les longueurs de foulée et les temps de contact au sol apparaissent comparables, voire plus favorables à la chaussure en mousse dans certaines conditions.\
+
+L’analyse des angles articulaires met en évidence des profils globalement similaires entre les deux types de chaussures, suggérant une stratégie de course conservée. Toutefois, la chaussure à plaque carbone est associée à des cinématiques légèrement plus lissées et à des amplitudes angulaires réduites, en particulier au niveau de la cheville, traduisant une adaptation subtile de la mécanique articulaire sans modification majeure de la cinématique globale.\
+
+Ainsi, les hypothèses initiales ne sont que partiellement validées et semblent dépendre fortement de la vitesse de course. Ces résultats soulignent que les éventuels bénéfices des chaussures à plaque carbone ne peuvent être généralisés et doivent être interprétés en tenant compte du contexte d’utilisation et des limites liées aux données cinématiques seules.
 
 Cette étude pourrait être enrichie par :
 
@@ -459,7 +472,7 @@ Frederick, E. C., Clarke, T. E., Larsen, J. L., & Cooper, L. B. (1983). The effe
 
 Fuller, J. T., Thewlis, D., Tsiros, M. D., Brown, N. A., & Buckley, J. D. (2017). Six-week transition to minimalist shoes improves running economy and time-trial performance. Journal of Science and Medicine in Sport, 20(12), 1117–1122. <https://doi.org/10.1016/j.jsams.2017.04.013> 
 
-Hébert-Losier, Kim, et al. “Metabolic and Performance Responses of Male Runners Wearing 3 Types of Footwear: Nike Vaporfly 4%, Saucony Endorphin Racing Flats, and Their Own Shoes.” Journal of Sport and Health Science, vol. 11, no. 3, May 2022, pp. 275–84. ScienceDirect,[ https://doi.org/10.1016/j.jshs.2020.11.012](https://doi.org/10.1016/j.jshs.2020.11.012)
+Hébert-Losier, Kim, et al. “Metabolic and Performance Responses of Male Runners Wearing 3 Types of Footwear: Nike Vaporfly 4%, Saucony Endorphin Racing Flats, and Their Own Shoes.” Journal of Sport and Health Science, vol. 11, no. 3, May 2022, pp. 275–84. ScienceDirect,<https://doi.org/10.1016/j.jshs.2020.11.012>
 
 Hoogkamer, W., Kipp, S., Frank, J. H., Farina, E. M., Luo, G., & Kram, R. (2018). A comparison of the energetic cost of running in marathon racing shoes. Sports Medicine, 48(4), 1009–1019. <https://doi.org/10.1007/s40279-017-0811-2> 
 
